@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>thoughtsre — Where the math meets the code.</title>
+  <meta name="description" content="The technical imprint of Binghao Ng. A blog and open-source collection exploring mathematics, machine learning, and software engineering from first principles.">
+  <meta property="og:title" content="thoughtsre">
+  <meta property="og:description" content="Where the math meets the code. The technical imprint of Binghao Ng.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://thoughtsre.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --teal-deep: #3d6b6e;
+      --teal-mid: #5a8f8e;
+      --teal-light: #8fbcb5;
+      --slate: #2e3e4e;
+      --slate-light: #4a5d6e;
+      --ink: #1a1a1a;
+      --paper: #f8f6f2;
+      --paper-warm: #f0ece4;
+      --rule: #d4cfc4;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 18px;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Newsreader', Georgia, serif;
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ---- NAV ---- */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: flex-end;
+      gap: 2rem;
+      background: linear-gradient(var(--paper) 60%, transparent);
+    }
+
+    nav a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--slate-light);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--teal-deep);
+    }
+
+    /* ---- SECTIONS ---- */
+    section {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* ---- HERO ---- */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .hero-logo {
+      width: 320px;
+      max-width: 80%;
+      margin-bottom: 2rem;
+    }
+
+    .hero-tagline {
+      font-size: 1.35rem;
+      font-weight: 300;
+      color: var(--slate);
+      letter-spacing: -0.01em;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-tagline em {
+      font-style: italic;
+      color: var(--teal-deep);
+    }
+
+    .hero-desc {
+      font-size: 0.95rem;
+      color: var(--slate-light);
+      max-width: 520px;
+      line-height: 1.8;
+    }
+
+    .scroll-hint {
+      margin-top: 4rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--rule);
+      text-decoration: none;
+      display: inline-block;
+      animation: drift 2.5s ease-in-out infinite;
+    }
+
+    .scroll-hint:hover {
+      color: var(--teal-mid);
+    }
+
+    .read-more {
+      display: inline-block;
+      margin-top: 2rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--rule);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .read-more:hover {
+      color: var(--teal-mid);
+    }
+
+    @keyframes drift {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(6px); }
+    }
+
+    /* ---- DIVIDER ---- */
+    .divider {
+      width: 48px;
+      height: 1px;
+      background: var(--teal-mid);
+      margin: 5rem 0;
+    }
+
+    /* ---- ABOUT ---- */
+    .about {
+      padding-top: 6rem;
+      padding-bottom: 4rem;
+    }
+
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--teal-mid);
+      margin-bottom: 2rem;
+    }
+
+    .about p {
+      font-size: 1.05rem;
+      color: var(--slate);
+      margin-bottom: 1.5rem;
+      max-width: 560px;
+    }
+
+    /* ---- MANIFESTO ---- */
+    .manifesto {
+      padding-top: 4rem;
+      padding-bottom: 6rem;
+    }
+
+    .manifesto-title {
+      font-size: 1.6rem;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 2.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .manifesto-body p {
+      font-size: 1rem;
+      color: var(--slate);
+      margin-bottom: 1.4rem;
+      max-width: 560px;
+    }
+
+    .manifesto-body p.emphatic {
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .manifesto-body p.closing {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--teal-deep);
+      letter-spacing: 0.02em;
+      margin-top: 2.5rem;
+    }
+
+    /* ---- LINKS ---- */
+    .links {
+      padding-top: 2rem;
+      padding-bottom: 8rem;
+      border-top: 1px solid var(--rule);
+    }
+
+    .links-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      margin-top: 2rem;
+    }
+
+    .links-grid a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.82rem;
+      color: var(--slate);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      transition: color 0.3s;
+      letter-spacing: 0.02em;
+    }
+
+    .links-grid a:hover {
+      color: var(--teal-deep);
+    }
+
+    .links-grid a .arrow {
+      font-size: 0.9rem;
+      transition: transform 0.3s;
+    }
+
+    .links-grid a:hover .arrow {
+      transform: translateX(4px);
+    }
+
+    /* ---- FOOTER ---- */
+    footer {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 2rem;
+      border-top: 1px solid var(--rule);
+    }
+
+    footer p {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--rule);
+      letter-spacing: 0.06em;
+    }
+
+    /* ---- FADE IN ---- */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 520px) {
+      html { font-size: 16px; }
+      nav { padding: 0.8rem 1.2rem; gap: 1.2rem; }
+      section { padding: 0 1.4rem; }
+      .hero-logo { width: 240px; }
+      .hero-tagline { font-size: 1.15rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#about">About</a>
+    <a href="#manifesto">Manifesto</a>
+    <a href="https://thoughtsre.substack.com" target="_blank" rel="noopener">Blog</a>
+    <a href="https://github.com/thoughtsre" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://bsky.app/profile/thoughtsre.com" target="_blank" rel="noopener">Bluesky</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <img src="logo.png" alt="thoughtsre" class="hero-logo">
+    <p class="hero-tagline">Seriously curious.<br><em>Where the math meets the code.</em></p>
+    <p class="hero-desc">The technical imprint of Binghao — a blog and open-source collection exploring mathematics, machine learning, and software engineering from first principles.</p>
+    <a href="#about" class="scroll-hint">↓ Read more</a>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about fade-in" id="about">
+    <p class="section-label">About</p>
+    <p>thoughtsre is a technical blog by Binghao Ng for the seriously curious. Each post is a deep-dive walkthrough at the intersection of mathematics, machine learning, and software engineering — working through the theory, the derivation, and the implementation from first principles, with accompanying open-source code in Python, Scala, or Rust.</p>
+    <p>The blog lives on Substack. The code lives on GitHub. Everything is published in the open.</p>
+    <a href="#manifesto" class="read-more">↓ Read more</a>
+  </section>
+
+  <section><div class="divider"></div></section>
+
+  <!-- MANIFESTO -->
+  <section class="manifesto fade-in" id="manifesto">
+    <p class="section-label">Manifesto</p>
+    <h2 class="manifesto-title">The thoughtsre Manifesto</h2>
+    <div class="manifesto-body">
+      <p class="emphatic">We believe understanding starts where the shortcut ends.</p>
+      <p>Every equation has a derivation. Every algorithm has a proof. Every line of code has a reason. We don't skip steps.</p>
+      <p>We work from first principles — not because it's faster, but because it's honest. A concept you can derive is a concept you own. One you memorised is one you're borrowing.</p>
+      <p>We write the math. Then we write the code. Then we publish both. The blog post is the explanation; the repo is the receipt.</p>
+      <p>We are polyglot by necessity. Some problems think in Python. Some think in Scala. Some think in Rust. We follow the problem, not the language.</p>
+      <p>We learn in public. The walkthroughs are real — written while figuring things out, not after. The rough edges stay in. The wrong turns are part of the map.</p>
+      <p>We go deep on things that are hard. Probability distributions, not prompts. Bellman equations, not bullet points. Structure-from-Motion, not summaries.</p>
+      <p class="emphatic">We are seriously curious.</p>
+      <p class="closing">This is thoughtsre.</p>
+    </div>
+    <a href="#links" class="read-more">↓ Read more</a>
+  </section>
+
+  <section><div class="divider"></div></section>
+
+  <!-- LINKS -->
+  <section class="links fade-in" id="links">
+    <p class="section-label">Find the work</p>
+    <div class="links-grid">
+      <a href="https://thoughtsre.substack.com" target="_blank" rel="noopener">
+        Blog on Substack <span class="arrow">→</span>
+      </a>
+      <a href="https://github.com/thoughtsre" target="_blank" rel="noopener">
+        Code on GitHub <span class="arrow">→</span>
+      </a>
+      <a href="https://bsky.app/profile/thoughtsre.com" target="_blank" rel="noopener">
+        @thoughtsre.com on Bluesky <span class="arrow">→</span>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
