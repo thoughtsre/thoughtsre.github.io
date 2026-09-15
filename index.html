@@ -71,6 +71,90 @@
       color: var(--teal-deep);
     }
 
+    /* ---- RESOURCES DROPDOWN ---- */
+    .dropdown {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .dropdown-toggle {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--slate-light);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: color 0.3s;
+    }
+
+    .dropdown-toggle:hover,
+    .dropdown-toggle:focus {
+      color: var(--teal-deep);
+      outline: none;
+    }
+
+    .dropdown .caret {
+      font-size: 0.6rem;
+      line-height: 1;
+      transition: transform 0.25s ease;
+    }
+
+    .dropdown:hover .caret,
+    .dropdown:focus-within .caret,
+    .dropdown.open .caret {
+      transform: rotate(180deg);
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      min-width: max-content;
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      padding: 0.4rem 0;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(6px);
+      transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+    }
+
+    .dropdown:hover .dropdown-menu,
+    .dropdown:focus-within .dropdown-menu,
+    .dropdown.open .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown-menu a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--slate-light);
+      text-decoration: none;
+      padding: 0.45rem 1.1rem;
+      white-space: nowrap;
+      transition: color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .dropdown-menu a:hover,
+    .dropdown-menu a:focus {
+      color: var(--teal-deep);
+      background: var(--paper-warm);
+      outline: none;
+    }
+
     /* ---- SECTIONS ---- */
     section {
       max-width: 680px;
@@ -296,6 +380,13 @@
   <nav>
     <a href="#about">About</a>
     <a href="#manifesto">Manifesto</a>
+    <div class="dropdown">
+      <button class="dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">Resources<span class="caret">▾</span></button>
+      <div class="dropdown-menu">
+        <a href="coding-loop.html">Coding Loop</a>
+        <a href="documentation-structure.html">Documentation Structure</a>
+      </div>
+    </div>
     <a href="https://thoughtsre.substack.com" target="_blank" rel="noopener">Blog</a>
     <a href="https://github.com/thoughtsre" target="_blank" rel="noopener">GitHub</a>
     <a href="https://bsky.app/profile/thoughtsre.com" target="_blank" rel="noopener">Bluesky</a>
@@ -368,6 +459,25 @@
     }, { threshold: 0.15 });
 
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    const dropdown = document.querySelector('.dropdown');
+    if (dropdown) {
+      const toggle = dropdown.querySelector('.dropdown-toggle');
+      const close = () => {
+        dropdown.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      };
+      toggle.addEventListener('click', () => {
+        const open = dropdown.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', String(open));
+      });
+      document.addEventListener('click', (e) => {
+        if (!dropdown.contains(e.target)) close();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') { close(); toggle.focus(); }
+      });
+    }
   </script>
 
 </body>
