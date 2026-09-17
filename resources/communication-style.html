@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Communication Style</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f8f6f2;
+    --bg-alt: #f0ece4;
+    --text: #1a1a1a;
+    --text-dim: #4a5d6e;
+    --border: #d4cfc4;
+    --accent: #3d6b6e;
+    --accent-bg: #e6eeea;
+    --code-bg: #f0ece4;
+    --code-text: #5a8f8e;
+    --shadow: 0 1px 3px rgba(26,26,26,0.06);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Newsreader', Georgia, serif;
+    line-height: 1.6;
+  }
+  .layout {
+    display: grid;
+    grid-template-columns: 260px minmax(0, 1fr);
+    max-width: 1180px;
+    margin: 0 auto;
+    gap: 48px;
+  }
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; }
+    nav.toc { position: static !important; max-height: none !important; }
+  }
+  nav.toc {
+    position: sticky;
+    top: 0;
+    align-self: start;
+    padding: 32px 16px 32px 24px;
+    max-height: 100vh;
+    overflow-y: auto;
+    font-size: 13.5px;
+    font-family: 'DM Mono', monospace;
+  }
+  nav.toc .back-links {
+    padding-bottom: 14px;
+    margin-bottom: 18px;
+    border-bottom: 1px solid var(--border);
+  }
+  nav.toc .back-link {
+    display: block;
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 12.5px;
+    padding: 3px 0;
+  }
+  nav.toc .back-link:hover { color: var(--accent); }
+  nav.toc .toc-title {
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 11px;
+    color: var(--text-dim);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  nav.toc ul { list-style: none; padding: 0; margin: 0; }
+  nav.toc li { margin: 2px 0; }
+  nav.toc a {
+    display: block;
+    color: var(--text-dim);
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 6px;
+    border-left: 2px solid transparent;
+  }
+  nav.toc a:hover { background: var(--bg-alt); color: var(--text); }
+
+  main { padding: 48px 24px 96px 0; min-width: 0; }
+  header.hero {
+    padding-bottom: 28px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--border);
+  }
+  header.hero .kicker {
+    color: var(--accent);
+    font-family: 'DM Mono', monospace;
+    font-weight: 600;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+  }
+  header.hero h1 {
+    font-size: 32px;
+    margin: 0 0 14px 0;
+    letter-spacing: -0.01em;
+  }
+  header.hero p.lede {
+    color: var(--text-dim);
+    font-size: 16px;
+    max-width: 68ch;
+    margin: 0;
+  }
+
+  h2 {
+    font-size: 22px;
+    margin-top: 56px;
+    margin-bottom: 14px;
+    padding-top: 8px;
+    scroll-margin-top: 16px;
+    letter-spacing: -0.01em;
+  }
+  p { margin: 0 0 14px 0; }
+  a { color: var(--accent); }
+
+  pre {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 22px;
+    overflow-x: auto;
+    font-size: 13.5px;
+    line-height: 1.6;
+    font-family: 'DM Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    color: var(--text);
+  }
+
+  footer {
+    margin-top: 64px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    color: var(--text-dim);
+    font-size: 13px;
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+
+<nav class="toc">
+  <div class="back-links">
+    <a class="back-link" href="/">← thoughtsre</a>
+    <a class="back-link" href="./coding-loop.html">← Coding loop</a>
+    <a class="back-link" href="./documentation-structure.html">← Docs structure</a>
+  </div>
+  <div class="toc-title">Contents</div>
+  <ul>
+    <li><a href="#intro">Introduction</a></li>
+    <li><a href="#prompt">The Prompt</a></li>
+  </ul>
+</nav>
+
+<main>
+  <header class="hero">
+    <div class="kicker">AI Communication Guide</div>
+    <h1>Communication Style</h1>
+    <p class="lede">
+      The communication style I prompt AI to use with me.
+    </p>
+  </header>
+
+  <section id="intro">
+    <h2>Introduction</h2>
+    <p>
+      AI generated text can sometimes be mannered, verbose, and indirect. I prompt AI to use a direct, conversational style that is easy to read and understand. The rules below are the defaults I use in every repo, and they can be refined for specific contexts.
+    </p>
+  </section>
+
+  <section id="prompt">
+    <h2>The Prompt</h2>
+    <pre># Communication style
+
+These are your default communication rules. The no-mannered-prose rule is hard: it applies in every repo and no repo-level instruction relaxes it. The conversational and documentation rules are defaults; a repo-level instruction may refine them for its own context.
+
+## No mannered prose
+
+Say what you mean. Mannered prose substitutes metaphor and flourish for direct statement: instead of "a parameter worth varying" it produces "a dial worth turning"; instead of "this point still matters" it writes "this point earns its keep." Those phrases exist to display the writer, not to convey the idea, and readers can tell. Mannered prose also makes the reader work harder so the writer can perform, and it is imprecise — a metaphor drags in connotations you did not choose and cannot control. When a literal phrase is available, use it. This applies to everything you produce: replies, comments, and documentation.
+
+## Conversational tone
+
+During an interactive discussion, and when posting a comment (on a PR, issue, or similar), write the way a knowledgeable colleague talks to a peer: plain language, direct address, contractions where they sound natural. The reader should feel a person talking to them, not a report being delivered.
+
+Keep it as brief as the content allows. Conversational does not mean verbose, and it does not mean mannered — stay direct, and do not add flourish to be friendly.
+
+## Documentation
+
+When you author or edit documentation, write tightly. These rules govern structure and terseness; the mannered-prose rule above governs diction. Both apply.
+
+1. **Every entry terminates.** Index and summary entries cap at about 40 words, then link out. An entry that needs a chain of semicolons has outgrown the index — promote it to a section and link to it.
+2. **One sentence, one claim.** Cap sentences at about 30 words.
+3. **Noun clusters stop at three words.** Prefer "the failure after merge" to "post-merge `mvpN` re-test failure."
+4. **Parentheticals do not nest.** One level only. A nested parenthetical means the sentence carries two ideas — split it.
+5. **Normative separate from historical.** State what is true now. Put amendments, supersessions, and issue references in a changelog at the end — never splice them into the sentence that states the decision.</pre>
+  </section>
+
+  <footer>
+    The communication style I use when prompting AI.
+  </footer>
+</main>
+</div>
+</body>
+</html>
